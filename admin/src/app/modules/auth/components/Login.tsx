@@ -10,14 +10,14 @@ import {useAuth} from '../core/Auth'
 
 const loginSchema = Yup.object().shape({
   email: Yup.string()
-    .email('Wrong email format')
-    .min(3, 'Minimum 3 symbols')
-    .max(50, 'Maximum 50 symbols')
-    .required('Email is required'),
+    .email('Formato del correo electrónico no válido')
+    .min(3, 'Mínimo 3 caracteres')
+    .max(50, 'Máximo 50 caracteres')
+    .required('Campo requerido'),
   password: Yup.string()
-    .min(3, 'Minimum 3 symbols')
-    .max(50, 'Maximum 50 symbols')
-    .required('Password is required'),
+    .min(3, 'Mínimo 3 caracteres')
+    .max(50, 'Máximo 50 caracteres')
+    .required('Se requiere una contraseña'),
 })
 
 const initialValues = {
@@ -48,7 +48,7 @@ export function Login() {
       } catch (error) {
         console.error(error)
         saveAuth(undefined)
-        setStatus('The login details are incorrect')
+        setStatus('Los datos ingresados son incorrectos')
         setSubmitting(false)
         setLoading(false)
       }
@@ -64,51 +64,50 @@ export function Login() {
     >
       {/* begin::Heading */}
       <div className='text-center mb-11'>
-        <h1 className='text-dark fw-bolder mb-3'>Sign In</h1>
-        <div className='text-gray-500 fw-semibold fs-6'>Your Social Campaigns</div>
+        <h1 className='text-dark fw-bolder mb-3'>Iniciar sesión</h1>
       </div>
       {/* begin::Heading */}
 
       {/* begin::Login options */}
       <div className='row g-3 mb-9'>
         {/* begin::Col */}
-        <div className='col-md-6'>
+        <div className='col-md-6 px-2'>
           {/* begin::Google link */}
           <a
             href='#'
             className='btn btn-flex btn-outline btn-text-gray-700 btn-active-color-primary bg-state-light flex-center text-nowrap w-100'
           >
             <img
-              alt='Logo'
+              alt='Google Logo'
               src={toAbsoluteUrl('/media/svg/brand-logos/google-icon.svg')}
               className='h-15px me-3'
             />
-            Sign in with Google
+            Iniciar sesión con Google
           </a>
           {/* end::Google link */}
         </div>
         {/* end::Col */}
 
         {/* begin::Col */}
-        <div className='col-md-6'>
-          {/* begin::Google link */}
+        <div className='col-md-6 px-2'>
+          {/* begin::Outlook link */}
           <a
             href='#'
             className='btn btn-flex btn-outline btn-text-gray-700 btn-active-color-primary bg-state-light flex-center text-nowrap w-100'
           >
             <img
-              alt='Logo'
-              src={toAbsoluteUrl('/media/svg/brand-logos/apple-black.svg')}
+              alt='Microsoft Logo'
+              src={toAbsoluteUrl('/media/svg/brand-logos/microsoft-5.svg')}
               className='theme-light-show h-15px me-3'
             />
             <img
               alt='Logo'
-              src={toAbsoluteUrl('/media/svg/brand-logos/apple-black-dark.svg')}
+              src={toAbsoluteUrl('/media/svg/brand-logos/microsoft-5.svg')}
               className='theme-dark-show h-15px me-3'
             />
-            Sign in with Apple
+            Iniciar sesión con Microsoft
           </a>
-          {/* end::Google link */}
+          {/* end::Microsoft link */}
         </div>
         {/* end::Col */}
       </div>
@@ -116,7 +115,9 @@ export function Login() {
 
       {/* begin::Separator */}
       <div className='separator separator-content my-14'>
-        <span className='w-125px text-gray-500 fw-semibold fs-7'>Or with email</span>
+        <span className='text-gray-500 fw-semibold fs-7 text-nowrap'>
+          O usa tu correo electrónico y contraseña
+        </span>
       </div>
       {/* end::Separator */}
 
@@ -127,17 +128,17 @@ export function Login() {
       ) : (
         <div className='mb-10 bg-light-info p-8 rounded'>
           <div className='text-info'>
-            Use account <strong>admin@demo.com</strong> and password <strong>demo</strong> to
-            continue.
+            Usa el correo <strong>admin@demo.com</strong> y contraseña <strong>demo</strong>
+            para continuar.
           </div>
         </div>
       )}
 
       {/* begin::Form group */}
       <div className='fv-row mb-8'>
-        <label className='form-label fs-6 fw-bolder text-dark'>Email</label>
+        <label className='form-label fs-6 fw-bolder text-dark'>Correo electrónico</label>
         <input
-          placeholder='Email'
+          placeholder='ejemplo@email.com'
           {...formik.getFieldProps('email')}
           className={clsx(
             'form-control bg-transparent',
@@ -160,7 +161,7 @@ export function Login() {
 
       {/* begin::Form group */}
       <div className='fv-row mb-3'>
-        <label className='form-label fw-bolder text-dark fs-6 mb-0'>Password</label>
+        <label className='form-label fw-bolder text-dark fs-6 mb-0'>Contraseña</label>
         <input
           type='password'
           autoComplete='off'
@@ -191,7 +192,7 @@ export function Login() {
 
         {/* begin::Link */}
         <Link to='/auth/forgot-password' className='link-primary'>
-          Forgot Password ?
+          ¿Olvidaste tu contraseña?
         </Link>
         {/* end::Link */}
       </div>
@@ -205,10 +206,10 @@ export function Login() {
           className='btn btn-primary'
           disabled={formik.isSubmitting || !formik.isValid}
         >
-          {!loading && <span className='indicator-label'>Continue</span>}
+          {!loading && <span className='indicator-label'>Ingresar</span>}
           {loading && (
             <span className='indicator-progress' style={{display: 'block'}}>
-              Please wait...
+              Cargando...
               <span className='spinner-border spinner-border-sm align-middle ms-2'></span>
             </span>
           )}
@@ -217,9 +218,9 @@ export function Login() {
       {/* end::Action */}
 
       <div className='text-gray-500 text-center fw-semibold fs-6'>
-        Not a Member yet?{' '}
+        ¿No tienes una cuenta?{' '}
         <Link to='/auth/registration' className='link-primary'>
-          Sign up
+          Registrarse
         </Link>
       </div>
     </form>
