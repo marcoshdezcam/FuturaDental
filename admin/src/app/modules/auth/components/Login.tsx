@@ -63,13 +63,22 @@ export function Login() {
       id='kt_login_signin_form'
     >
       {/* begin::Heading */}
-      <div className='text-center mb-11'>
-        <h1 className='text-dark fw-bolder mb-3'>Iniciar sesión</h1>
+      <div className='text-center my-2'>
+        {/* begin::Logo */}
+        <Link to='/' className='my-5'>
+          <img
+            alt='Logo'
+            src={toAbsoluteUrl('/media/logos/futura-dental-iniciales.svg')}
+            className='h-75px'
+          />
+        </Link>
+        {/* end::Logo */}
+        <h1 className='text-dark fw-bolder my-5'>Iniciar sesión</h1>
       </div>
       {/* begin::Heading */}
 
       {/* begin::Login options */}
-      <div className='row g-3 mb-9'>
+      <div className='row g-3'>
         {/* begin::Col */}
         <div className='col-md-6 px-2'>
           {/* begin::Google link */}
@@ -82,7 +91,7 @@ export function Login() {
               src={toAbsoluteUrl('/media/svg/brand-logos/google-icon.svg')}
               className='h-15px me-3'
             />
-            Iniciar sesión con Google
+            Ingresar con Google
           </a>
           {/* end::Google link */}
         </div>
@@ -105,7 +114,7 @@ export function Login() {
               src={toAbsoluteUrl('/media/svg/brand-logos/microsoft-5.svg')}
               className='theme-dark-show h-15px me-3'
             />
-            Iniciar sesión con Microsoft
+            Ingresar con Microsoft
           </a>
           {/* end::Microsoft link */}
         </div>
@@ -126,9 +135,9 @@ export function Login() {
           <div className='alert-text font-weight-bold'>{formik.status}</div>
         </div>
       ) : (
-        <div className='mb-10 bg-light-info p-8 rounded'>
+        <div className='mb-10 bg-light-info p-4 rounded'>
           <div className='text-info'>
-            Usa el correo <strong>admin@demo.com</strong> y contraseña <strong>demo</strong>
+            Usa el correo <strong>admin@demo.com</strong> y contraseña <strong>demo </strong>
             para continuar.
           </div>
         </div>
@@ -187,9 +196,8 @@ export function Login() {
       {/* end::Form group */}
 
       {/* begin::Wrapper */}
-      <div className='d-flex flex-stack flex-wrap gap-3 fs-base fw-semibold mb-8'>
+      <div className='d-flex flex-stack flex-wrap gap-3 fs-base fw-semibold my-2'>
         <div />
-
         {/* begin::Link */}
         <Link to='/auth/forgot-password' className='link-primary'>
           ¿Olvidaste tu contraseña?
@@ -199,7 +207,7 @@ export function Login() {
       {/* end::Wrapper */}
 
       {/* begin::Action */}
-      <div className='d-grid mb-10'>
+      <div className='d-grid my-5'>
         <button
           type='submit'
           id='kt_sign_in_submit'
