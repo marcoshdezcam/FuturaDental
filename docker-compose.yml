@@ -1,0 +1,79 @@
+services:
+  frontend:
+    image: wordpress
+    container_name: frontend
+    ports:
+      - "8088:80"
+    restart: always
+    depends_on:
+      - frontend-db
+    environment:
+      WORDPRESS_DB_HOST: frontend-db:3306
+      WORDPRESS_DB_USER: marcos
+      WORDPRESS_DB_PASSWORD: Nacimi627267
+      WORDPRESS_DB_NAME: frontend
+    volumes:
+      - frontend:/var/www/html
+
+  frontend-db:
+    image: mysql
+    container_name: frontend-db
+    command: --default-authentication-plugin=mysql_native_password
+    ports:
+      - "3306:3306"
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: Nacimi627267
+      MYSQL_DATABASE: frontend
+      MYSQL_USER: marcos
+      MYSQL_PASSWORD: Nacimi627267
+    volumes:
+      - frontend-db:/var/lib/mysql
+
+  admin-db:
+    image: postgres
+    container_name: admin-db
+    ports:
+      - "5432:5432"
+    restart: always
+    environment:
+      POSTGRES_USER: marcos
+      POSTGRES_PASSWORD: Nacimi627267
+      POSTGRES_DB: admin
+    volumes:
+      - admin-db:/var/lib/postgresql/data
+
+#TODO: Node + React
+#  admin:
+#    image: node
+#    user: node
+#    working_dir: /home/node/app
+#    ports:
+#      - "3000:3000"
+#    restart: always
+#    environment:
+#      - NODE_ENV=development
+#    volumes:
+#      - ./:/home/node/app
+#    command: "npm start"
+
+#  admin-api:
+#    image: node
+#    ports:
+#      - "3001:3001"
+#    restart: always
+#    depends_on:
+#      - admin-api-db
+#    environment:
+#      - NODE_ENV=development
+#    volumes:
+#      - ./:/home/node/app
+#    expose:
+#      - "8081"
+#    command: "npm start"
+#
+
+volumes:
+  frontend:
+  frontend-db:
+  admin-db:

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="Futura Dental - Administrador de pacientes" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700"
+    />
+    <title>Futura Dental | Administrador</title>
+    <link rel="shortcut icon" href="%PUBLIC_URL%/media/logos/favicon.ico" />
+    <link rel="stylesheet" id="layout-styles-anchor" href="%PUBLIC_URL%/splash-screen.css" />
+  </head>
+
+  <body id="kt_body" class="page-loading">
+    <noscript>Es necesario habilitar Javascript para ejecutar esta aplicación web.</noscript>
+    <!--begin::Theme mode setup on page load-->
+    <script>
+      let themeMode = 'system'
+
+      if (localStorage.getItem('kt_theme_mode_value')) {
+        themeMode = localStorage.getItem('kt_theme_mode_value')
+      }
+
+      if (themeMode === 'system') {
+        themeMode = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+      }
+
+      document.documentElement.setAttribute('data-bs-theme', themeMode)
+    </script>
+    <!--end::Theme mode setup on page load-->
+
+    <div id="root"></div>
+
+    <!--begin::Loading markup-->
+    <div id="splash-screen" class="splash-screen">
+      <img
+        src="%PUBLIC_URL%/media/logos/futura-dental-iniciales.svg"
+        class="dark-logo"
+        alt="Iniciales Futura Dental"
+      />
+      <img
+        src="%PUBLIC_URL%/media/logos/futura-dental-iniciales.svg"
+        class="light-logo"
+        alt="Iniciales Futura Dental"
+      />
+      <span>Cargando ...</span>
+    </div>
+    <!--end::Loading markup-->
+
+    <div id="root-modals"></div>
+  </body>
+</html>
