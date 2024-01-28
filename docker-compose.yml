@@ -43,6 +43,7 @@ services:
     volumes:
       - admin-db:/var/lib/postgresql/data
 
+#! FIX: Run & Build Admin
   admin-app:
     build:
       context: react
