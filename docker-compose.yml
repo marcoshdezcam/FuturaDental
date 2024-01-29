@@ -43,24 +43,31 @@ services:
     volumes:
       - admin-db:/var/lib/postgresql/data
 
-#! FIX: Run & Build Admin
+  #! FIX: Run & Build Admin
   admin-app:
     build:
-      context: react
       dockerfile: ./admin/Dockerfile
     container_name: admin-app
-    # user: node
-    working_dir: /usr/src/app
-    networks: admin-app
-    ports:
-      - "3030:3030"
-    restart: always
-    environment:
-      - NODE_ENV=development
+    working_dir: /app
     volumes:
-      - ./:/user/src/app
-    command: "npm start"
+      - admin:/app
+    networks:
+      - admin-app
+    ports:
+      - "3000:3000"
+    expose:
+      - "3000"
+    restart: always
 
+volumes:
+  frontend:
+  frontend-db:
+  admin-db:
+  admin:
+
+networks:
+  admin-app:
+    driver: bridge
 #  admin-api:
 #    image: node
 #    ports:
@@ -76,12 +83,3 @@ services:
 #      - "8081"
 #    command: "npm start"
 #
-
-volumes:
-  frontend:
-  frontend-db:
-  admin-db:
-
-networks:
-  admin-app:
-    driver: bridge
