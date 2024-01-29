@@ -43,31 +43,21 @@ services:
     volumes:
       - admin-db:/var/lib/postgresql/data
 
-  #! FIX: Run & Build Admin
-  admin-app:
+  admin:
     build:
       dockerfile: ./admin/Dockerfile
-    container_name: admin-app
+    container_name: admin
     working_dir: /app
     volumes:
       - admin:/app
     networks:
-      - admin-app
+      - admin
     ports:
       - "3000:3000"
     expose:
       - "3000"
     restart: always
 
-volumes:
-  frontend:
-  frontend-db:
-  admin-db:
-  admin:
-
-networks:
-  admin-app:
-    driver: bridge
 #  admin-api:
 #    image: node
 #    ports:
@@ -83,3 +73,13 @@ networks:
 #      - "8081"
 #    command: "npm start"
 #
+
+volumes:
+  frontend:
+  frontend-db:
+  admin-db:
+  admin:
+
+networks:
+  admin:
+    driver: bridge
