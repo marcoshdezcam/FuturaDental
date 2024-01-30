@@ -6,18 +6,18 @@ services:
       - "8088:80"
     restart: always
     depends_on:
-      - frontend-db
+      - frontend_db
     environment:
-      WORDPRESS_DB_HOST: frontend-db:3306
+      WORDPRESS_DB_HOST: frontend_db:3306
       WORDPRESS_DB_USER: marcos
       WORDPRESS_DB_PASSWORD: Nacimi627267
       WORDPRESS_DB_NAME: frontend
     volumes:
       - frontend:/var/www/html
 
-  frontend-db:
+  frontend_db:
     image: mysql
-    container_name: frontend-db
+    container_name: frontend_db
     command: --default-authentication-plugin=mysql_native_password
     ports:
       - "3306:3306"
@@ -28,11 +28,11 @@ services:
       MYSQL_USER: marcos
       MYSQL_PASSWORD: Nacimi627267
     volumes:
-      - frontend-db:/var/lib/mysql
+      - frontend_db:/var/lib/mysql
 
-  admin-db:
+  admin_db:
     image: postgres
-    container_name: admin-db
+    container_name: admin_db
     ports:
       - "5432:5432"
     restart: always
@@ -41,7 +41,7 @@ services:
       POSTGRES_PASSWORD: Nacimi627267
       POSTGRES_DB: admin
     volumes:
-      - admin-db:/var/lib/postgresql/data
+      - admin_db:/var/lib/postgresql/data
 
   admin:
     build:
@@ -65,22 +65,24 @@ services:
     container_name: api
     working_dir: /app
     volumes:
-      - .api:/app
+      - api:/app
+    networks:
+      - admin
     ports:
       - "2222:2222"
     depends_on:
-      - admin-db
+      - admin_db
     environment:
       - NODE_ENV=development
     expose:
-      - "8081"
-    command: "npm start"
+      - "2222"
 
 volumes:
   frontend:
-  frontend-db:
-  admin-db:
+  frontend_db:
+  admin_db:
   admin:
+  api:
 
 networks:
   admin:
